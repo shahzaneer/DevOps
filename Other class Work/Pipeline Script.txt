@@ -1,0 +1,15 @@
+pipeline {    
+    agent {
+        docker {
+            image 'openjdk'
+        }
+    }
+    stages {
+        stage('Build') {
+            steps {
+                git 'https://github.com/malik-qasim/HelloJava'
+                sh 'java HelloWorld.java'
+            }
+        }
+    }
+}

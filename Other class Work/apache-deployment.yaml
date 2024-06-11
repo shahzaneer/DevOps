@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-server
+  labels:
+    app: apache-server
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: apache
+  template:
+    metadata:
+      labels:
+        app: apache
+    spec:
+      containers:
+        - name: apache-container
+          image: httpd
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: codevolume
+              mountPath: /var/www/html
+      volumes:
+        - name: codevolume
+          hostPath:
+            path: /code
